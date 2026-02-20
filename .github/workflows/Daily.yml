@@ -23,11 +23,23 @@ jobs:
     Daily:
       runs-on: self-hosted
       steps:
-        - uses: actions/checkout@v4
+        - name: Checkout Test Repository
+          uses: actions/checkout@v4
           with:
             repository: pablolf14/github_actions_test
-            ref: main   # o un tag, o un SHA
+            ref: ${{ github.event.inputs.test_branch }}
             token: ${{ secrets.PAT_TOKEN }}
             path: github_actions_test
+
+        - name: Run Daily Tests
+          run: python ./github_actions_test/.github/workflows/utils/generate_a_file.py ${{ github.event.inputs.test_branch }} Test_Results 
+            
+
+        - name: Upload logs
+          uses: actions/upload-artifact@v4
+          if: always()
+          with:
+            name: TestResults-${{ github.ref_name }}-${{ runner.name }}-${{ github.run_number }}
+            path: ./github_actions_test/Test_Results/
 
 
