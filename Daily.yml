@@ -1,0 +1,33 @@
+name: Daily
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Target environment"
+        required: true
+        default: "test"
+        type: choice
+        options:
+          - test
+          - dev
+          - prod
+      test_branch:
+         description: "Branch to run tests on"
+         required: true
+         default: "main"
+         type: string
+
+
+jobs:
+    Daily:
+      runs-on: self-hosted
+      steps:
+        - uses: actions/checkout@v4
+          with:
+            repository: pablolf14/github_actions_test
+            ref: main   # o un tag, o un SHA
+            token: ${{ secrets.PAT_TOKEN }}
+            path: github_actions_test
+
+
