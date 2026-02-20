@@ -40,6 +40,6 @@ jobs:
           if: always()
           with:
             name: TestResults-${{ github.ref_name }}-${{ runner.name }}-${{ github.run_number }}
-            path: ./github_actions_test/Test_Results/
+            path: ./Test_Results/
 
 
