@@ -34,7 +34,8 @@ jobs:
             path: github_actions_test
 
         - name: Run Daily Tests
-          run: python ./github_actions_test/.github/workflows/utils/generate_a_file.py ${{ github.event.inputs.test_branch }} Test_Results 
+          working-directory: ./github_actions_test  
+          run: python .github/workflows/utils/generate_a_file.py ${{ github.event.inputs.test_branch }} Test_Results 
             
 
         - name: Upload logs
@@ -42,7 +43,7 @@ jobs:
           if: always()
           with:
             name: TestResults-${{ github.ref_name }}-${{ runner.name }}-${{ github.run_number }}
-            path: ./Test_Results/
+            path: ./github_actions_test/Test_Results/
 
         - run: date
 
