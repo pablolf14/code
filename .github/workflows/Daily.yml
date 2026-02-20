@@ -23,7 +23,9 @@ jobs:
     Daily:
       runs-on: self-hosted
       steps:
-        - name: Checkout Test Repository
+        - run: date
+
+        - name: Checkout Test Repository   
           uses: actions/checkout@v4
           with:
             repository: pablolf14/github_actions_test
@@ -41,5 +43,7 @@ jobs:
           with:
             name: TestResults-${{ github.ref_name }}-${{ runner.name }}-${{ github.run_number }}
             path: ./Test_Results/
+
+        - run: date
 
 
