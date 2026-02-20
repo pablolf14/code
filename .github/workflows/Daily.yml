@@ -35,7 +35,7 @@ jobs:
 
         - name: Run Daily Tests
           working-directory: ./github_actions_test  
-          run: python .github/workflows/utils/generate_a_file.py ${{ github.event.inputs.test_branch }} Test_Results 
+          run: python .github/workflows/utils/generate_a_file.py ${{ github.event.inputs.environment }} Test_Results 
             
 
         - name: Upload logs
